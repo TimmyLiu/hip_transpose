@@ -27,7 +27,7 @@ int main(int argc, char **argv)
     {
         for(int j = 0; j < input_col_size; j++)
         {
-            input_matrix[i * input_col_size + j] = (double)(i * input_col_size + j);
+            input_matrix[i * input_col_size + j] = (float)(i * input_col_size + j);
         }
     }
 
@@ -36,7 +36,7 @@ int main(int argc, char **argv)
     {
         for(int j = 0; j < 16; j++)
         {
-            std::cout << input_matrix[i * input_col_size + j] << " ";
+            std::cout << input_matrix[(i+64) * input_col_size + j] << " ";
         }
         std::cout << std::endl;
     }
@@ -82,7 +82,7 @@ int main(int argc, char **argv)
     {
         for(int j = 0; j < 16; j++)
         {
-            std::cout << output_matrix[i * output_col_size + j] << " ";
+            std::cout << output_matrix[i * output_col_size + j + 64] << " ";
         }
         std::cout << std::endl;
     }
@@ -94,7 +94,7 @@ int main(int argc, char **argv)
     {
         for(int j = 0; j < input_col_size; j++)
         {
-            if(input_matrix[i * input_col_size + j] != output_matrix[j * input_col_size + i])
+            if(input_matrix[i * input_col_size + j] != output_matrix[j * input_row_size + i])
             {
                 passed = false;
                 break;
