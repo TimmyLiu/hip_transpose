@@ -71,8 +71,8 @@ int main(int argc, char **argv)
     int block_size = 16;//dim3(input_row_size/16/4, input_col_size/16/4, 1)
     const int micro_tile_size = 64;
     //this is hip bug that I have to reverse the dim3 values
-    hipLaunchKernel(HIP_KERNEL_NAME(transpose_kernel<float,micro_tile_size,micro_tile_size>), dim3(1, input_row_size/micro_tile_size, input_col_size/micro_tile_size * batch_size),
-                          dim3(1, 16, 16), 0, 0, input_matrix_device, output_matrix_device,
+    hipLaunchKernel(HIP_KERNEL_NAME(transpose_kernel<float,micro_tile_size,micro_tile_size>), dim3(input_col_size/micro_tile_size * batch_size, input_row_size/micro_tile_size, 1),
+                          dim3(16, 16, 1), 0, 0, input_matrix_device, output_matrix_device,
                           input_row_size, input_col_size, batch_size );
     hipDeviceSynchronize();
     //copy data to back to host
